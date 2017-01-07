@@ -4,6 +4,8 @@ dist
 .sass-cache
 client/bower_components
 
+.idea/
+
 .DS_Store
 npm-debug.log
 /preview/preview.zip
