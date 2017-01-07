@@ -1,0 +1,96 @@
+<div class="page" data-ng-controller="OrdersCtrl">
+    <section class="panel panel-default">
+        <div class="panel-heading"><strong><span class="glyphicon glyphicon-th"></span> 订单列表</strong></div>
+        <div class="panel-body padding-lg">
+            <div class="row">
+                <form class="form-horizontal">
+                    <div class="form-group col-sm-5">
+                        <label class="col-sm-3">书籍名称</label>
+
+                        <div class="col-sm-6">
+                            <select data-ng-model="conditions.status" class="form-control">
+                                <option value="" selected>全部</option>
+                                <option value="{{obj.code}}" ng-repeat="obj in orderStatusObj">{{obj.codeValue}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-5">
+                        <label class="col-sm-3"></label>
+
+                        <div class="col-sm-6">
+                            <button type="button" class="form-control btn btn-w-md btn-gap-v btn-success"
+                                    ng-click="loadOrders()">
+                                查询
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="row overflow-y-scroll">
+                <table class="table table-striped table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="width-160px">联系方式</th>
+                        <th class="width-160px">联系地址</th>
+                        <th class="width-160px">下单日期</th>
+                        <th class="width-160px">书籍明细</th>
+                        <th class="width-160px">总金额</th>
+                        <th class="width-160px">状态</th>
+                        <th class="width-160px">配送信息</th>
+                        <th class="width-160px">备注</th>
+                        <th class="width-160px">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="item in orders">
+                        <td>{{item.name + '/' + item.mobile}}</td>
+                        <td>{{item.address}}</td>
+                        <td>{{item.orderDateDesc}}</td>
+                        <td><a ng-click="openOrderDetail(item)">共{{item.orderDetails.length}}本</a></td>
+                        <td>{{item.amount}}</td>
+                        <td>{{item.statusDesc}}</td>
+                        <td>{{item.sendOrderCom}} <span ng-if="item.sendOrderComOrderNo">/</span>
+                            {{item.sendOrderComOrderNo}}
+                        </td>
+                        <td>{{item.note}}</td>
+                        <td>
+                            <button ng-if="item.status == 20" ng-click="goSend(item)">去配送</button>
+                            <button ng-if="item.status == 30" ng-click="confirmSendDone(item)">确认送达</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </section>
+</div>
+
+<script type="text/ng-template" id="orderDetail.html">
+    <div class="modal-header">
+        书籍列表
+    </div>
+    <div class="modal-body">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>书籍名称</th>
+                <th>作者</th>
+                <th>出版社</th>
+                <th>ISBN</th>
+                <th>价格</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="item in order.orderDetails">
+                <td>{{item.bookName}}</td>
+                <td>{{item.bookAuthor}}</td>
+                <td>{{item.bookPress}}</td>
+                <td>{{item.bookIsbn}}</td>
+                <td>{{item.price}}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</script>
