@@ -4,8 +4,8 @@
     angular.module('service').service('APIConfig', ['$http', '$timeout', function ($http, $timeout) {
         return {
             path: function (resource) {
-                return 'http://120.76.52.196:6666/' + resource;
-                //return 'http://localhost:6666/' + resource;
+                //return 'http://120.76.52.196:9999/' + resource;
+                return 'http://localhost:9999/' + resource;
             },
             ajax: function (url, type, params, callback, errback) {
                 var promise = null;
