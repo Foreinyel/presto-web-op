@@ -18,7 +18,7 @@
                             'Content-Type': 'application/json'
                         },
                         cache: false,
-                        timeout: 12000,
+                        timeout: 60000,
                         withCredetials: false
                     });
                 } else {
@@ -30,7 +30,7 @@
                             'Content-Type': 'application/json'
                         },
                         cache: false,
-                        timeout: 12000,
+                        timeout: 60000,
                         withCredetials: false
                     });
                 }
